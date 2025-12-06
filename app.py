@@ -507,6 +507,7 @@ def get_system_stats():
         
         return f"""
 ### 📊 System Statistics
+- 📚 **Documents:** {len(docs)}
 - 👥 **Total Users:** {total_users}
 - 🔢 **Total Feedback:** {stats['total_feedback']}
 - ⭐ **Avg Rating:** {stats['avg_rating']:.2f}/5
