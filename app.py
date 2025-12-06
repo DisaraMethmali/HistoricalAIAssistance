@@ -516,45 +516,13 @@ def get_system_stats():
     except Exception as e:
         return f"Error: {e}"
 
-# ---------- Custom CSS ----------
-custom_css = """
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-* {
-    font-family: 'Poppins', sans-serif !important;
-}
-
-.primary-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-    border: none !important;
-    font-weight: 500 !important;
-    transition: all 0.3s ease !important;
-}
-
-.primary-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3) !important;
-}
-
-.feedback-btn {
-    margin: 5px !important;
-    min-width: 60px !important;
-}
-
-h1, h2, h3 {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-weight: 600 !important;
-}
-"""
-
 # ---------- Gradio Interface ----------
 print("🚀 Building Gradio interface...")
 
-with gr.Blocks(css=custom_css, title="Historical AI Chatbot", theme=gr.themes.Soft()) as demo:
-    
+# Create interface with theme but no custom CSS parameter
+demo = gr.Blocks(title="Historical AI Chatbot", theme=gr.themes.Soft())
+
+with demo:
     # Store last QA for feedback
     last_question = gr.State("")
     last_answer = gr.State("")
@@ -583,18 +551,18 @@ with gr.Blocks(css=custom_css, title="Historical AI Chatbot", theme=gr.themes.So
                     )
                     
                     with gr.Row():
-                        send_btn = gr.Button("✨ Send", variant="primary", elem_classes="primary-btn")
+                        send_btn = gr.Button("✨ Send", variant="primary")
                         clear_btn = gr.Button("🗑️ Clear", variant="secondary")
                     
                     # Feedback section (hidden by default)
                     with gr.Group(visible=False) as feedback_group:
                         gr.Markdown("### ⭐ Rate this answer:")
                         with gr.Row():
-                            star1_btn = gr.Button("⭐", elem_classes="feedback-btn")
-                            star2_btn = gr.Button("⭐⭐", elem_classes="feedback-btn")
-                            star3_btn = gr.Button("⭐⭐⭐", elem_classes="feedback-btn")
-                            star4_btn = gr.Button("⭐⭐⭐⭐", elem_classes="feedback-btn")
-                            star5_btn = gr.Button("⭐⭐⭐⭐⭐", elem_classes="feedback-btn")
+                            star1_btn = gr.Button("⭐")
+                            star2_btn = gr.Button("⭐⭐")
+                            star3_btn = gr.Button("⭐⭐⭐")
+                            star4_btn = gr.Button("⭐⭐⭐⭐")
+                            star5_btn = gr.Button("⭐⭐⭐⭐⭐")
                         
                         feedback_status = gr.Textbox(label="Feedback Status", interactive=False, visible=False)
                     
