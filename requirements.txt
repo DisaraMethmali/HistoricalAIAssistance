@@ -1,0 +1,8 @@
+gradio
+sentence-transformers
+chromadb
+transformers
+torch
+sentencepiece
+protobuf
+accelerate
